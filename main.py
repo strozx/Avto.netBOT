@@ -8,8 +8,13 @@ url = "https://www.avto.net/Ads/results.asp?znamka=Renault&model=Clio&modelID=&t
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 clios = soup.findAll("div", {"class": "ResultsAd"})
-for index, car in clios:
+for index, car in enumerate(clios):
+    if index == 20:
+        break
     clio = car.find("div", {"class": "ResultsAdDataTop"})
     specs = clio.find("ul")
-    print(specs.content)
+    spec = specs.find("li")
+    for data in spec:
+        print(data[-4:])
     i=0
+# TODO: POVEZAVA Z BAZO 
